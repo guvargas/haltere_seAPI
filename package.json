@@ -1,0 +1,23 @@
+{
+  "jest": {
+    "testTimeout": 5000
+  },
+  "name": "haltere-se",
+  "version": "1.0.0",
+  "description": "API do app haltere-se",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "jest": "^27.0.6",
+    "nodemon": "^2.0.12",
+    "pg-promise": "^10.11.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "jest --env node"
+  },
+  "author": "Gustavo Vargas de Andrade",
+  "license": "ISC"
+}
