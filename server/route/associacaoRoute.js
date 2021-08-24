@@ -13,6 +13,15 @@ try {
 		next(e);
 	}
 });
+router.get('/associacao/exerciciosportreino/:idtreino', async function (req, res, next) {
+	try {
+			const exercicios = await associacaoService.getAssociacaoExercicioPorTreino(req.params.idtreino);
+			res.status(200).json(exercicios);
+		} catch (e) {
+			console.log(e);
+			next(e);
+		}
+	});
 
 
 router.post('/associacao/treino/:idtreino/exercicio/:idexercicio/', async function (req, res, next) {

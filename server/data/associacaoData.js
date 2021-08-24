@@ -13,3 +13,9 @@ exports.getAssociacaoTreinoExercicio = function () {
 	return database.query('select * from assoctreinoexercicios');
 };
 
+exports.getAssociacaoExercicioPorTreino = function (idtreino) {
+	return database.query('select * from exercicio d inner join assoctreinoexercicios b	on d.idexercicio= b.idexercicio  where b.idtreino =$1',[idtreino]);
+};
+
+
+
