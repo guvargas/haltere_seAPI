@@ -8,3 +8,8 @@ exports.saveAssociacaoTreinoExercicio = function (idtreino,idexercicio) {
 			idexercicio]);
 };
 
+
+exports.getAssociacaoTreinoExercicio = function () {
+	return database.query('select * from assoctreinoexercicios');
+};
+

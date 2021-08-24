@@ -5,3 +5,9 @@ exports.saveAssociacaoTreinoExercicio = async function (idtreino,idexercicio) {
 //	if (existingTreino) throw new Error('Treino already exists');
 	return associacaoData.saveAssociacaoTreinoExercicio(idtreino,idexercicio);
 };
+
+exports.getAssociacaoTreinoExercicio = async function (idtreino,idexercicio) {
+	//const existingTreino = await treinoData.getTreinoByAcao(treino.acao);
+//	if (existingTreino) throw new Error('Treino already exists');
+	return associacaoData.getAssociacaoTreinoExercicio();
+};
