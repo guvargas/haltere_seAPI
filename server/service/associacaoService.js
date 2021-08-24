@@ -24,12 +24,24 @@ exports.getAssociacaoTreinosPorAluno = async function (idaluno) {
 	return associacaoData.getAssociacaoTreinosPorAluno(idaluno);
 };
 
+exports.getAssociacaoTreinoPorTreinador = async function (idtreinador) {
+	//const existingTreino = await treinoData.getTreinoByAcao(treino.acao);
+//	if (existingTreino) throw new Error('Treino already exists');
+	return associacaoData.getAssociacaoTreinoPorTreinador(idtreinador);
+};
+
 
 
 exports.saveAssociacaoAlunoTreino = async function (idaluno,idtreino,dia) {
 	//const existingTreino = await treinoData.getTreinoByAcao(treino.acao);
 //	if (existingTreino) throw new Error('Treino already exists');
 	return associacaoData.saveAssociacaoAlunoTreino(idaluno,idtreino,dia);
+};
+
+exports.saveAssociacaoTreinadorTreino = async function (idtreinador,idtreino) {
+	//const existingTreino = await treinoData.getTreinoByAcao(treino.acao);
+//	if (existingTreino) throw new Error('Treino already exists');
+	return associacaoData.saveAssociacaoTreinadorTreino(idtreinador,idtreino);
 };
 
 

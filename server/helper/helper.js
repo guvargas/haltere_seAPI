@@ -61,3 +61,14 @@ this.gerarTreino = function (){
   //console.log(treino.nome);
   return treino;
 }
+
+this.gerarTreinador = function (){
+  const treinador = {
+        nome: generate(), 
+        cpf: generate(),
+        senha:generate(),
+        salario:getRandomInt(500,1300)
+      }
+  //console.log(treinador.nome);
+  return treinador;
+}

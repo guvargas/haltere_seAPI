@@ -13,10 +13,56 @@ test('Deve criar um treino e um exercicio e associar os dois', async function(){
 
 });
 
-test('Deve pegar a lista de treinos e exercicios', async function(){
-    const responseAssociacao = await helper.request(`http://localhost:3000/associacao/treinoexercicio/`, 'get');
-    expect(responseAssociacao.status).toBe(200);
+
+test('Deve criar um aluno e um treino e associar os dois', async function(){
+    const aluno = helper.gerarAluno();
+    const responseAluno = await helper.request(`http://localhost:3000/alunos`, 'post', aluno);
+    expect(responseAluno.status).toBe(201);
+
+    const treino = helper.gerarTreino();
+    const responseTreino = await helper.request(`http://localhost:3000/treinos`, 'post', treino);
+    expect(responseTreino.status).toBe(201);
+
+    const responseAssociacao = await helper.request(`http://localhost:3000/associacao/aluno/${responseAluno.data.idaluno}/treino/${responseTreino.data.idtreino}/dia/${helper.gerarDia()}`, 'post');
+    expect(responseAssociacao.status).toBe(201);
 });
+
+
+test('Deve criar um treinador e um treino e associar os dois', async function(){
+    const treinador = helper.gerarTreinador();
+    const responseTreinador = await helper.request(`http://localhost:3000/treinadores`, 'post', treinador);
+    expect(responseTreinador.status).toBe(201);
+
+    const treino = helper.gerarTreino();
+    const responseTreino = await helper.request(`http://localhost:3000/treinos`, 'post', treino);
+    expect(responseTreino.status).toBe(201);
+
+    const responseAssociacao = await helper.request(`http://localhost:3000/associacao/treinador/${responseTreinador.data.idtreinador}/treino/${responseTreino.data.idtreino}`, 'post');
+    expect(responseAssociacao.status).toBe(201);
+});
+
+test('Deve pegar todos os treinos de um treinador', async function(){
+    const treinador = helper.gerarTreinador();
+    const responseTreinador = await helper.request(`http://localhost:3000/treinadores`, 'post', treinador);
+    expect(responseTreinador.status).toBe(201);
+
+    const treino = helper.gerarTreino();
+    const responseTreino = await helper.request(`http://localhost:3000/treinos`, 'post', treino);
+    expect(responseTreino.status).toBe(201);
+    const treino1 = helper.gerarTreino();
+    const responseTreino1 = await helper.request(`http://localhost:3000/treinos`, 'post', treino1);
+    expect(responseTreino1.status).toBe(201);
+
+    const responseAssociacao1 = await helper.request(`http://localhost:3000/associacao/treinador/${responseTreinador.data.idtreinador}/treino/${responseTreino1.data.idtreino}`, 'post');
+    expect(responseAssociacao1.status).toBe(201);
+    const responseAssociacao = await helper.request(`http://localhost:3000/associacao/treinador/${responseTreinador.data.idtreinador}/treino/${responseTreino.data.idtreino}`, 'post');
+    expect(responseAssociacao.status).toBe(201);
+
+    const responseAssociacaoGET = await helper.request(`http://localhost:3000/associacao/treinosportreinador/${responseTreinador.data.idtreinador}`, 'get');
+    expect(responseAssociacaoGET.status).toBe(200);
+    expect(responseAssociacaoGET.data).toHaveLength(2);
+});
+
 
 test('Deve pegar todos os exercicios de um treino', async function(){
     const treino = helper.gerarTreino();
@@ -42,16 +88,16 @@ test('Deve pegar todos os exercicios de um treino', async function(){
 
 });
 
-test.only('Deve pegar todos os treinos de um aluno', async function(){
+test('Deve pegar todos os treinos de um aluno', async function(){
     const aluno = helper.gerarAluno();
     const responseAluno = await helper.request(`http://localhost:3000/alunos`, 'post', aluno);
     expect(responseAluno.status).toBe(201);
 
-    const treino = helper.gerarExercicio();
+    const treino = helper.gerarTreino();
     const responseTreino = await helper.request(`http://localhost:3000/treinos`, 'post', treino);
     expect(responseTreino.status).toBe(201);
 
-    const treino1 = helper.gerarExercicio();
+    const treino1 = helper.gerarTreino();
     const responseTreino1 = await helper.request(`http://localhost:3000/treinos`, 'post', treino1);
     expect(responseTreino1.status).toBe(201);
 
@@ -63,7 +109,14 @@ test.only('Deve pegar todos os treinos de um aluno', async function(){
 
     const responseAssociacaoGET = await helper.request(`http://localhost:3000/associacao/treinosporaluno/${responseAluno.data.idaluno}`, 'get');
     expect(responseAssociacaoGET.status).toBe(200);
-
+    expect(responseAssociacaoGET.data).toHaveLength(2);
 });
 
+
+
+
+test('Deve pegar a lista de treinos e exercicios', async function(){
+    const responseAssociacao = await helper.request(`http://localhost:3000/associacao/treinoexercicio/`, 'get');
+    expect(responseAssociacao.status).toBe(200);
+});
 

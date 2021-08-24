@@ -8,7 +8,6 @@ exports.saveAssociacaoTreinoExercicio = function (idtreino,idexercicio) {
 			idexercicio]);
 };
 
-
 exports.saveAssociacaoAlunoTreino = function (idaluno,idtreino,dia) {
 	return database.one(
 		'insert into assoctreinoaluno (idtreino,idaluno,dia) values ($1, $2,$3) returning *', 
@@ -16,11 +15,19 @@ exports.saveAssociacaoAlunoTreino = function (idaluno,idtreino,dia) {
 			idaluno,dia]);
 };
 
-
-
+exports.saveAssociacaoTreinadorTreino = function (idtreinador,idtreino) {
+	return database.one(
+		'insert into assoctreinotreinador (idtreinador,idtreino) values ($1, $2) returning *', 
+		[idtreinador, 
+			idtreino]);
+};
 
 exports.getAssociacaoTreinoExercicio = function () {
 	return database.query('select * from assoctreinoexercicios');
+};
+
+exports.getAssociacaoTreinoPorTreinador = function (idtreinador) {
+	return database.query('select * from treino d inner join assoctreinotreinador b	on d.idtreino= b.idtreino  where b.idtreinador =$1',[idtreinador]);
 };
 
 exports.getAssociacaoExercicioPorTreino = function (idtreino) {
