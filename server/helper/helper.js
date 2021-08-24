@@ -1,6 +1,7 @@
 const crypto = require('crypto');
 const axios = require('axios');
 const { func } = require('../infra/database');
+const { get } = require('../route/associacaoRoute');
 
 
 const generate = function () {
@@ -13,9 +14,17 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
   }
 
+
+
 this.request = function (url, method, data) {
 	return axios({ url, method, data, validateStatus: false });
 };
+
+
+this.gerarDia=function(){
+  const aluno1 = getRandomInt(1,7);
+  return aluno1;
+}
 
  this.gerarAluno=function(){
   const aluno1 = {
