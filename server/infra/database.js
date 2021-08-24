@@ -6,5 +6,4 @@ const db = pgp({
 	port: 5432,
 	database: 'Haltere_se'
 });
-
 module.exports = db;
