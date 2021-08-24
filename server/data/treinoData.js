@@ -8,6 +8,9 @@ exports.getTreinoByName = function (nome) {
 exports.getTreinoById = function (id) {
 	return database.oneOrNone('select * from treino where idtreino = $1', [id]);
 };
+exports.getTreinos = function () {
+	return database.query('select * from treino'); 
+};
 
 exports.saveTreino = function (treino) {
 	return database.one(

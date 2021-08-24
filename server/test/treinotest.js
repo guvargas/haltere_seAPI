@@ -4,6 +4,14 @@ const axios = require('axios');
 //const helper = require('../helper/helper');
 
 
+test('Deve trazer todos os treinos', async function(){
+  const treino1 = gerarTreino();
+  await request(`http://localhost:3000/treinos`, 'post', treino1);
+  const response = await request(`http://localhost:3000/treinos`, 'get');
+  expect(response.status).toBe(200);
+  const data = response.data;
+  expect.anything(data);
+});
 
 
 test('Should save an treino', async function(){
@@ -13,10 +21,9 @@ test('Should save an treino', async function(){
     const data = response.data;
 	  expect(data.nome).toBe(treino1.nome);
   	expect(data.cpf).toBe(treino1.cpf);
-  //  await treinoService.deleteTreino(data.id);
 });
 
-
+/*
 test('Deve encontrar um treino pelo seu nome', async function(){
   const treino1 = gerarTreino();
   await request(`http://localhost:3000/treinos`, 'post', treino1);
@@ -25,9 +32,7 @@ test('Deve encontrar um treino pelo seu nome', async function(){
   expect(response.status).toBe(200);
   expect(data.nome).toBe(treino1.nome);
   expect(data.descricao).toBe(treino1.descricao);
-
-//  await treinoService.deleteTreino(data.id);
-});
+});*/
 
 test('Deve atualizar treino', async function(){
   const treino = gerarTreino();
@@ -41,7 +46,7 @@ test('Deve atualizar treino', async function(){
   expect(data.cpf).toBe(outroTreino.cpf);
 });
 
-test.only('Deve excluir treino', async function(){
+test('Deve excluir treino', async function(){
   const treino = gerarTreino();
   const responsePOST = await request(`http://localhost:3000/treinos`, 'post', treino);
   const responseDELETE = await request(`http://localhost:3000/treinos/${responsePOST.data.idtreino}`, 'delete');

@@ -14,11 +14,23 @@ router.get('/treinos/:id', async function (req, res, next) {
 });
 
 
-router.get('/treinos/nome/:nome', async function (req, res, next) {
+router.get('/treinos/', async function (req, res, next) {
 	try {
-		const treino = await treinoService.getTreinoByName(req.params.nome);
+		const treino = await treinoService.getTreinos();
 		res.json(treino);
 	} catch (e) {
+		console.log(e);
+		next(e);
+	}
+});
+
+
+router.get('/treinos/nome/:name', async function (req, res, next) {
+	try {
+		const treino = await treinoService.getTreinoByName(req.params.name);
+		res.json(treino);
+	} catch (e) {
+		console.log(e);
 		next(e);
 	}
 });

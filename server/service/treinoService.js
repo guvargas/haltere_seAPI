@@ -6,6 +6,12 @@ exports.getTreinoById = async function (id) {
 	if (!treino) throw new Error('Treino not found');
 	return treino;
 };
+
+exports.getTreinos = async function () {
+	const treino = await treinoData.getTreinos();
+	if (!treino) throw new Error('Treino not found');
+	return treino;
+};
 exports.getTreinoByName = async function (nome) {
 	const treino = await treinoData.getTreinoByName(nome);
 	if (!treino) throw new Error('Treino not found');
