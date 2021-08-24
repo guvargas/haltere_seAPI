@@ -6,7 +6,7 @@ app.use('/', require('./route/alunosRoute'));
 app.use('/', require('./route/treinadorRoute'));
 app.use('/', require('./route/exercicioRoute'));
 app.use('/', require('./route/treinoRoute'));
-
+app.use('/', require('./route/associacaoRoute'));
 
 app.use(function (error, req, res, next) {
 	if (error.message === 'Aluno already exists') {
