@@ -7,3 +7,5 @@ const db = pgp({
 	database: 'Haltere_se'
 });
 module.exports = db;
+
+//dava pra aplicar singleton mas a linguagem é kekw
